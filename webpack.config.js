@@ -32,11 +32,7 @@ module.exports = {
   devServer: {
     contentBase: 'public/',
     historyApiFallback: true,
-    noInfo: true,
-    port: 3355,
-    setup (app) {
-      app.use(require('superstatic')({ config: firebaseConfig.data.hosting }))
-    }
+    port: 3355
   },
   plugins: process.env.NODE_ENV === 'production'
   ? BASE_PLUGINS.concat([
