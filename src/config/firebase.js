@@ -23,8 +23,9 @@ export function getLoginUser (): Promise<?User> {
 export function startAuth () {
   const ui = new firebaseui.auth.AuthUI(firebase.auth())
   // FirebaseUI config.
-  if (document.body) {
-    document.body.innerHTML = `
+  const el = document.querySelector('.main')
+  if (el) {
+    el.innerHTML = `
       <div id="firebaseui-auth-container"></div>
     `
   }

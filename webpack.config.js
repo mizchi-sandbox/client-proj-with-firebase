@@ -4,7 +4,6 @@ const path = require('path')
 const webpack = require('webpack')
 const AsyncAwaitPlugin = require('webpack-async-await')
 const LicenseWebpackPlugin = require('license-webpack-plugin')
-const firebaseConfig = require('firebase-tools/lib/config').load({ cwd: process.cwd() })
 
 const BASE_PLUGINS = [
   new AsyncAwaitPlugin({}),
@@ -19,9 +18,6 @@ module.exports = {
     './src/main.js'
   ]
   : [
-    // 'react-hot-loader/patch',
-    // 'webpack-dev-server/client?http://localhost:3355',
-    // 'webpack/hot/only-dev-server',
     './src/main.js'
   ],
   output: {
@@ -53,8 +49,7 @@ module.exports = {
   ])
   : BASE_PLUGINS.concat([
     new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]),
   module: {
     rules: [
