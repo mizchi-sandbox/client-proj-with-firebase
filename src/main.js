@@ -1,23 +1,19 @@
 /* eslint "flowtype/require-valid-file-annotation": 0 */
 import 'babel-polyfill'
 import './styles/init.css'
-import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Root from './containers/Root'
+import { getLoginUser, startAuth } from './config/firebase'
 
-const root = document.querySelector('.main')
+const root = document.querySelector('.main');
 
-if (process.env.NODE_ENV === 'production') {
-  ReactDOM.render(<Root/>, root)
-} else {
-  const render = async () => {
-    const { default: Root } = (await import('./containers/Root'))
-    ReactDOM.render(
-      <AppContainer><Root/></AppContainer>,
-      root
-    )
+(async () => {
+  const user = await getLoginUser()
+
+  if (user) {
+    ReactDOM.render(<Root/>, root)
+  } else {
+    startAuth()
   }
-  render()
-  if (module.hot) module.hot.accept('./containers/Root', render)
-}
+})()

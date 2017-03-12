@@ -1,10 +1,10 @@
-/* eslint "flowtype/require-valid-file-annotation": 0 */
-/* eslint "import/no-commonjs": 0 */
+/* eslint-disable */
 
 const path = require('path')
 const webpack = require('webpack')
 const AsyncAwaitPlugin = require('webpack-async-await')
 const LicenseWebpackPlugin = require('license-webpack-plugin')
+const firebaseConfig = require('firebase-tools/lib/config').load({ cwd: process.cwd() })
 
 const BASE_PLUGINS = [
   new AsyncAwaitPlugin({}),
@@ -19,9 +19,9 @@ module.exports = {
     './src/main.js'
   ]
   : [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3355',
-    'webpack/hot/only-dev-server',
+    // 'react-hot-loader/patch',
+    // 'webpack-dev-server/client?http://localhost:3355',
+    // 'webpack/hot/only-dev-server',
     './src/main.js'
   ],
   output: {
@@ -32,8 +32,11 @@ module.exports = {
   devServer: {
     contentBase: 'public/',
     historyApiFallback: true,
+    noInfo: true,
     port: 3355,
-    hot: true
+    setup (app) {
+      app.use(require('superstatic')({ config: firebaseConfig.data.hosting }))
+    }
   },
   plugins: process.env.NODE_ENV === 'production'
   ? BASE_PLUGINS.concat([

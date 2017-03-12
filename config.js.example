@@ -1,0 +1,28 @@
+/* @flow */
+import firebase from 'firebase'
+
+export const firebaseConfig = {
+  apiKey: '',
+  authDomain: '',
+  databaseURL: '',
+  storageBucket: '',
+  messagingSenderId: ''
+}
+
+const callbackUrl = process.env.ENV === 'production'
+  ? 'https://' + firebaseConfig.authDomain
+  : 'http://localhost:3355'
+
+export const firebaseUiConfig = {
+  signInSuccessUrl: callbackUrl,
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID
+  ],
+  // Terms of service url.
+  tosUrl: '<your-tos-url>'
+}
