@@ -26,4 +26,3 @@ deployment:
     branch: release
     commands:
       - yarn build:production
-      - script/deploy

@@ -55,3 +55,7 @@ node_modules
 public/bundle.js
 public/licenses.txt
 .nyc_output
+
+# firebase
+
+.firebaserc
